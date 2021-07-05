@@ -7,7 +7,7 @@ snake [0] = {
     y: 8 * box
 }
 let direction = "right";
-let food = {
+let food = { /*comida aparece em locais aleatórios ao atualizar page*/
     x: Math.floor(Math.random() * 15 + 1) * box,
     y: Math.floor(Math.random() * 15 + 1) * box
 }
@@ -57,7 +57,12 @@ function iniciarJogo(){
     if(direction == "up") snakeY -= box;
     if (direction == "down") snakeY += box;
 
-    snake.pop(); /*retira último elemento do array*/
+    if(snakeX != food.x || snakeY != food.y){ /*ao ser comida, aparece em outro lugar*/
+        snake.pop(); /*retira último elemento do array*/
+        }
+    else {food.x = Math.floor(Math.random() * 15 + 1) * box; /*ao comer comida, cobrinha aumenta*/
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+    }  
 
     let newHead = {
         x: snakeX,
